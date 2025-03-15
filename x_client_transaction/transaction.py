@@ -111,6 +111,16 @@ class ClientTransaction:
         bytes_arr = [*self.key_bytes, *time_now_bytes, * hash_bytes[:16], self.ADDITIONAL_RANDOM_NUMBER]
         out = bytearray([random_num, *[item ^ random_num for item in bytes_arr]])
         return base64_encode(out).strip("=")
+    
+
+    @staticmethod
+    def decode_transaction_id(transaction_id: str):
+        base = transaction_id + "=" * (4 - len(transaction_id) % 4)
+        decode =list(base64.b64decode(base))
+        rand, value = decode[0], decode[:0:-1]
+        data = [value[i] ^ rand for i in range(len(value))][::-1]
+        key_bytes,time_now_bytes,hash_bytes,additional = data[:48], data[48:52], data[52:68], data[68]
+        return (key_bytes, time_now_bytes, hash_bytes, additional)
 
 if __name__ == "__main__":
     pass
