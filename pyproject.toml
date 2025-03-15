@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "x_client_transaction"
+version = "0.0.1"
+description = "x_client_transaction"
+authors = [
+    {name = "fa0311", email = "yuki@yuki0311.com"}
+]
+license = {text = "MIT"}
+dependencies = [
+    "beautifulsoup4 >= 4.13.3, < 5.0.0",
+    "lxml >= 5.3.1, < 6.0.0"
+]
+homepage = "https://github.com/fa0311/x_client_transaction"
+keywords = []
